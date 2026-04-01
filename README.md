@@ -6,7 +6,7 @@ A lo largo de este trabajo se abordan diferentes tipos de librerías, desde aque
 
 Para tener una mejor comprensión de estos conceptos, se desarrollaron distintos ejemplos prácticos en los que se aplican las librerías y los componentes mencionados, permitiendo observar su funcionamiento dentro de programas reales, de esta manera se evidencia cómo el uso adecuado de estas herramientas contribuye a la creación de aplicaciones más organizadas, funcionales y eficientes.
 
-## Definición de componentes, paquetes y  librerías
+## Definición de componentes, paquetes/librerías
 
 Las librerías en Python son conjuntos de módulos y funciones previamente desarrollados que permiten realizar tareas específicas sin necesidad de programarlas desde cero. Estas facilitan el desarrollo de aplicaciones, ya que ofrecen soluciones listas para usar en diferentes áreas como interfaces gráficas, análisis de datos, inteligencia artificial y automatización.
 
