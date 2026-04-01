@@ -983,7 +983,7 @@ def agregar_carrito(producto):
 
 ```
 
-## Creación y uso de librerias/librerias definidas por el usuario.  
+## Creación y uso de paquetes/librerias definidas por el usuario.  
 
 En el desarrollo de software, las librerías representan herramientas fundamentales que permiten a los programadores construir aplicaciones de manera más eficiente. Una librería, también conocida como biblioteca de código, es un conjunto de funciones, clases o módulos previamente desarrollados que pueden ser reutilizados para realizar tareas específicas sin necesidad de programarlas desde cero.
 
