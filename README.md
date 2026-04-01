@@ -454,8 +454,7 @@ Estos valores se crean dentro de una lista mediante un ciclo que se repite 20 ve
 ```python
     y = [random.randint(10, 50) for _ in range(20)]
 ```
-Gracias a random, se obtiene un conjunto de datos diferente cada vez que se ejecuta el programa. Estos datos se utilizan en la instrucción: Gracias a random, se obtiene un conjunto de datos diferente cada vez que se ejecuta el programa.
-Estos datos se utilizan en la instrucción:
+Gracias a random, se obtiene un conjunto de datos diferente cada vez que se ejecuta el programa. Estos datos se utilizan en la instrucción: 
 
 ```python
     ax.scatter(x, y)
@@ -752,4 +751,5 @@ Para que las gráficas se muestren correctamente, se requieren tres elementos cl
 ```
 Esto permite mostrar la gráfica dentro de la aplicación.
 
-**Libreria flet_charts 
+**Libreria flet_charts**
+
