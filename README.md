@@ -1,4 +1,4 @@
-# Apunntes unidad 2: Componentes y librerias 
+# Apuntes unidad 2: Componentes y librerias 
 
 En la programación, desarrollar aplicaciones de manera eficiente no solo implica escribir código, sino también saber aprovechar herramientas que faciliten el proceso. En Python, las librerías juegan un papel muy importante, ya que permiten utilizar funciones y recursos ya creados para resolver distintas tareas sin necesidad de comenzar desde cero.
 
