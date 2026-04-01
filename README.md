@@ -779,7 +779,7 @@ De esta manera, cada vez que el usuario presiona uno de los botones (por ejemplo
 
 El uso de esta librería tiene como objetivo principal integrar la visualización de datos dentro de la interfaz gráfica, haciendo que la aplicación sea más interactiva y funcional. Gracias a flet_charts, las gráficas no se muestran en ventanas externas, sino directamente en el mismo entorno de la aplicación, lo que mejora la experiencia del usuario y facilita la interacción con la información.
 
-**Codiog**
+**Codigo**
 ```python
 import flet as ft
 import matplotlib.pyplot as plt
@@ -898,4 +898,63 @@ ft.app(target=main)
 ```
 
 ## Creación de componentes (visuales y no visuales) definidos por el usuario
+
+Los componentes visuales son aquellos elementos dentro de una aplicación que poseen una representación gráfica, es decir, pueden ser vistos e interactuados por el usuario tanto en el diseño como durante la ejecución del programa. Estos componentes forman parte de la interfaz gráfica y permiten la comunicación directa entre el sistema y el usuario. Entre los ejemplos más comunes de componentes visuales se encuentran los botones, cuadros de texto, imágenes, barras de desplazamiento, listas y etiquetas. Todos estos elementos cumplen la función de mostrar información o permitir la interacción del usuario con la aplicación. A diferencia de los componentes no visuales, los componentes visuales sí tienen una apariencia en pantalla y responden a acciones del usuario, como clics, escritura o selección de opciones. Esta característica los convierte en elementos fundamentales para el diseño de interfaces intuitivas y funcionales.
+
+Tipos de componentes visuales
+
+Los componentes visuales pueden dividirse en dos tipos principales:
+
+-Componentes interactivos: Son aquellos que permiten la interacción directa del usuario. A través de ellos, el usuario puede introducir datos, seleccionar opciones o ejecutar acciones dentro de la aplicación. Ejemplos de estos componentes son los botones, campos de texto y listas desplegables.
+
+-Componentes gráficos: Son aquellos cuyo propósito principal es mostrar información visual, como imágenes, gráficos o textos. Generalmente no requieren interacción directa del usuario, aunque pueden ser manipulados por el programador para actualizar su contenido o apariencia.
+
+
+**Ejemplo**
+En el siguiente código se implementan diversos componentes visuales proporcionados por la librería flet, los cuales permiten construir la interfaz gráfica de una aplicación tipo tienda. Estos componentes son visibles para el usuario y facilitan la interacción con el sistema, ya sea mostrando información o permitiendo realizar acciones.
+
+Uno de los principales componentes visuales utilizados es ft.Container, el cual funciona como un contenedor que agrupa otros elementos en este caso, se utiliza para definir el componente personalizado ProductCard, que representa visualmente cada producto dentro de la tienda. Este contenedor incluye propiedades como tamaño, color de fondo, bordes y sombras, lo que permite mejorar la apariencia del diseño. Dentro de este contenedor se emplea ft.Column, que organiza los elementos de forma vertical, permitiendo estructurar la información del producto de manera ordenada. A su vez, se utilizan múltiples componentes ft.Text para mostrar datos como el identificador, nombre, descripción y precio del producto.
+
+Otro componente visual importante es ft.Image, el cual permite mostrar la imagen correspondiente a cada producto, contribuyendo a una presentación más atractiva. Asimismo, se utilizan componentes interactivos como ft.ElevatedButton, que permite al usuario agregar productos al carrito, y ft.IconButton, que funciona como un botón de favorito representado con un ícono. Además, se emplea ft.Row para organizar elementos de forma horizontal, como en el caso de los botones y el encabezado de la aplicación. También se utiliza ft.TextField, que actúa como un campo de entrada para buscar productos, permitiendo al usuario interactuar directamente con el sistema mediante texto. Otros componentes visuales relevantes incluyen ft.Divider, que sirve para separar secciones dentro de la interfaz, y ft.Page, que representa la estructura principal donde se agregan todos los elementos visuales.
+
+```python
+class ProductCard(ft.Container):
+
+    def __init__(self, producto, agregar_carrito):
+        super().__init__()
+
+        self.content = ft.Column(
+            controls=[
+
+                ft.Text(f"ID: {producto['id']}"),
+
+                ft.Image(
+                    src=f"assets/{producto['ruta_imagen']}",
+                    width=230,
+                    height=150
+                ),
+
+                ft.Text(producto["nombre"]),
+
+                ft.Text(producto["descripcion"]),
+
+                ft.Text(f"${producto['precio']:,}"),
+
+                ft.Row(
+                    controls=[
+                        ft.IconButton(icon=ft.Icons.FAVORITE_BORDER),
+
+                        ft.ElevatedButton(
+                            "Agregar al carrito",
+                            icon=ft.Icons.SHOPPING_CART
+                        )
+                    ]
+                )
+            ]
+        )
+```
+
+**Componentes no visuales**
+Los componentes no visuales son aquellos elementos dentro de una aplicación que no poseen una representación gráfica en la interfaz, es decir, no son visibles para el usuario durante la ejecución del programa. Sin embargo, cumplen funciones esenciales relacionadas con la lógica, el procesamiento de datos y el control del comportamiento del sistema.A diferencia de los componentes visuales, los componentes no visuales pueden colocarse dentro de los formularios o estructuras del programa sin que su posición tenga relevancia, ya que no influyen en el diseño de la interfaz. Su función principal es trabajar en segundo plano, gestionando información y permitiendo que la aplicación responda correctamente a las acciones del usuario.
+Estos componentes son fundamentales en el desarrollo de software, ya que permiten separar la lógica del programa de la parte visual, facilitando la organización, el mantenimiento y la escalabilidad del sistema. Gracias a ellos, es posible realizar operaciones como almacenar datos, ejecutar funciones, controlar eventos y procesar información.
 
