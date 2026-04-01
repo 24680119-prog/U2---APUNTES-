@@ -1,5 +1,11 @@
 # UPUNTES UNIDAD 2: Componentes y librerias 
 
+En la programación, desarrollar aplicaciones de manera eficiente no solo implica escribir código, sino también saber aprovechar herramientas que faciliten el proceso. En Python, las librerías juegan un papel muy importante, ya que permiten utilizar funciones y recursos ya creados para resolver distintas tareas sin necesidad de comenzar desde cero.
+
+A lo largo de este trabajo se abordan diferentes tipos de librerías, desde aquellas que forman parte del lenguaje hasta las que son creadas por el propio usuario. Estas herramientas permiten mejorar la organización del código, optimizar el tiempo de desarrollo y construir programas más completos y funcionales. Además, se analiza la creación de componentes visuales y no visuales, los cuales son esenciales para estructurar una aplicación. Mientras los componentes visuales permiten la interacción directa con el usuario a través de la interfaz, los componentes no visuales se encargan de procesar la información y controlar el funcionamiento interno del sistema.
+
+Para tener una mejor comprensión de estos conceptos, se desarrollaron distintos ejemplos prácticos en los que se aplican las librerías y los componentes mencionados, permitiendo observar su funcionamiento dentro de programas reales, de esta manera se evidencia cómo el uso adecuado de estas herramientas contribuye a la creación de aplicaciones más organizadas, funcionales y eficientes.
+
 ## Definición de componentes, paquetes y  librerías
 
 Las librerías en Python son conjuntos de módulos y funciones previamente desarrollados que permiten realizar tareas específicas sin necesidad de programarlas desde cero. Estas facilitan el desarrollo de aplicaciones, ya que ofrecen soluciones listas para usar en diferentes áreas como interfaces gráficas, análisis de datos, inteligencia artificial y automatización.
@@ -1093,3 +1099,27 @@ def main(page: ft.Page):
 ft.app(target=main)
 
 ```
+
+##Bibliografias 
+
+Flores, A. (2021, 5 noviembre). +15 librerías de Python que te ayudarán a transformar el mundo digital sin complicarte. https://www.crehana.com. https://www.crehana.com/blog/transformacion-digital/librerias-python/
+
+Emiliano, & Emiliano. (2023, 11 mayo). Características y librerías de Python. HD Tecnología. https://www.hd-tecnologia.com/caracteristicas-y-librerias-de-python/
+
+Sarahs. (2026, 25 febrero). Matplotlib: todo lo que tienes que saber sobre la librería Python de Dataviz. Liora. https://liora.io/es/todo-sobre-matplotlib
+
+Alberca, A. S. (2020, 4 octubre). La librería Matplotlib | Aprende con Alf. Aprende Con Alf. https://aprendeconalf.es/docencia/python/manual/matplotlib/
+
+Julio. (2023, 29 abril). Matplotlib, libreria para crear graficas con Python - Educalix Blog. Educalix Blog. https://blog.educalix.com/matplotlib-libreria-para-crear-graficas-con-python/
+
+Salgado, L. G. (2025, 7 enero). import random en Python: ¿qué es y cómo usar este módulo? KeepCoding Bootcamps. https://keepcoding.io/blog/que-es-el-modulo-import-random-en-python/
+
+De Imagina, E. (2026, 1 abril). ¿Qué es una librería y cuál es su función? Imagina Formación. https://imaginaformacion.com/tutoriales/que-es-una-libreria
+
+Client challenge. (s. f.-u). https://www.slideshare.net/slideshow/unidad-3-topicos-avanzados-de-programacion/35855111
+
+Neubox. (2024, 28 octubre). ¿Qué son los Frameworks y las Bibliotecas en el Desarrollo Web? Blog NEUBOX. https://neubox.com/blog/que-son-frameworks-y-bibliotecas-desarrollo-web/?srsltid=AfmBOordquXjGeyKONuG7Pt03m50WE4jMq3BpiVMIW56nSHyXaYzUDbu
+
+Ocana, G. (2012, 26 marzo). CREACION Y USO DE PAQUETES/LIBRERIAS DEFINIDAS POR EL USUARIO. Prezi. https://prezi.com/4ig7tgmoxama/creacion-y-uso-de-paqueteslibrerias-definidas-por-el-usuario/
+
+Contreras, R. (2018, 8 mayo). Creación de componentes (Visuales y No Visuales) definidos por el usuario. Prezi. https://prezi.com/4ig7tgmoxama/creacion-y-uso-de-paqueteslibrerias-definidas-por-el-usuario/
