@@ -1,7 +1,6 @@
-# UPUNTES UNIDAD 2: 
+# UPUNTES UNIDAD 2: Componentes y librerias 
 
-
-## Definición de componentes, paquetes / librerías
+## Definición de componentes, paquetes y  librerías
 
 Las librerías en Python son conjuntos de módulos y funciones previamente desarrollados que permiten realizar tareas específicas sin necesidad de programarlas desde cero. Estas facilitan el desarrollo de aplicaciones, ya que ofrecen soluciones listas para usar en diferentes áreas como interfaces gráficas, análisis de datos, inteligencia artificial y automatización.
 
@@ -955,6 +954,142 @@ class ProductCard(ft.Container):
 ```
 
 **Componentes no visuales**
+
 Los componentes no visuales son aquellos elementos dentro de una aplicación que no poseen una representación gráfica en la interfaz, es decir, no son visibles para el usuario durante la ejecución del programa. Sin embargo, cumplen funciones esenciales relacionadas con la lógica, el procesamiento de datos y el control del comportamiento del sistema.A diferencia de los componentes visuales, los componentes no visuales pueden colocarse dentro de los formularios o estructuras del programa sin que su posición tenga relevancia, ya que no influyen en el diseño de la interfaz. Su función principal es trabajar en segundo plano, gestionando información y permitiendo que la aplicación responda correctamente a las acciones del usuario.
 Estos componentes son fundamentales en el desarrollo de software, ya que permiten separar la lógica del programa de la parte visual, facilitando la organización, el mantenimiento y la escalabilidad del sistema. Gracias a ellos, es posible realizar operaciones como almacenar datos, ejecutar funciones, controlar eventos y procesar información.
 
+
+En el código desarrollado se implementan diversos componentes no visuales que cumplen un papel fundamental en el funcionamiento de la aplicación estos componentes no tienen una representación gráfica dentro de la interfaz, es decir, no son visibles para el usuario, pero se encargan de gestionar la lógica interna del sistema y el manejo de datos. Su función principal es permitir que la aplicación responda correctamente a las acciones del usuario, coordinando procesos como el almacenamiento de información, la actualización de valores y la ejecución de operaciones. Uno de los ejemplos más representativos es el manejo del carrito de compras, el cual se implementa mediante una estructura de datos tipo diccionario, a través de este componente, se almacenan los productos seleccionados por el usuario junto con sus cantidades. Además, se utiliza una función que permite actualizar dicha información cada vez que se agrega un nuevo producto este proceso ocurre en segundo plano, sin que el usuario vea directamente cómo se gestionan los datos, pero es esencial para el correcto funcionamiento de la aplicación.
+
+De esta manera, los componentes no visuales permiten separar la lógica del programa de la interfaz gráfica, facilitando la organización del código y asegurando que los elementos visuales funcionen de manera adecuada aunque no son visibles, son indispensables para el desarrollo de aplicaciones completas y funcionales.
+
+```python
+carrito = {}
+
+def agregar_carrito(producto):
+
+    nombre = producto["nombre"]
+
+    if nombre in carrito:
+        carrito[nombre] += 1
+    else:
+        carrito[nombre] = 1
+
+```
+
+## Creación y uso de librerias/librerias definidas por el usuario.  
+
+En el desarrollo de software, las librerías representan herramientas fundamentales que permiten a los programadores construir aplicaciones de manera más eficiente. Una librería, también conocida como biblioteca de código, es un conjunto de funciones, clases o módulos previamente desarrollados que pueden ser reutilizados para realizar tareas específicas sin necesidad de programarlas desde cero.
+
+El objetivo principal de una librería es simplificar el proceso de desarrollo, permitiendo a los programadores aprovechar soluciones ya existentes y enfocarse en la lógica principal de sus aplicaciones. En lenguajes como Python, las librerías pueden ser tanto estándar (incluidas en el lenguaje) como externas o incluso creadas por el propio usuario.
+
+
+Las librerías definidas por el usuario son aquellas que el propio programador crea con el fin de organizar y reutilizar su propio código en diferentes partes de un programa o incluso en otros proyectos. Estas librerías pueden contener funciones, clases o componentes personalizados que resuelven necesidades específicas. En el contexto de Python y el uso de Flet, crear una librería propia puede implicar definir componentes personalizados (como tarjetas, formularios o estructuras de interfaz) que posteriormente pueden ser reutilizados en distintas aplicaciones.
+
+
+**Características principales**
+
+Las librerías, incluyendo las definidas por el usuario, se caracterizan por:
+
+-Reutilización de código: Permiten utilizar funciones o clases en múltiples partes del programa sin necesidad de repetir código.
+
+-Modularidad: Se organizan en módulos o archivos independientes, facilitando su uso y mantenimiento.
+
+-Organización: Ayudan a estructurar el código en partes más claras y manejables.
+
+-Facilidad de mantenimiento: Al estar separadas, es más sencillo actualizar o modificar partes del sistema sin afectar todo el programa.
+
+
+**Funciones principales de una librería**
+
+Las librerías cumplen diversas funciones dentro del desarrollo de software, entre las más importantes destacan:
+
+-Simplificar tareas complejas: Proporcionan soluciones listas para usar.
+
+-Ahorrar tiempo de desarrollo: Evitan que el programador tenga que crear todo desde cero.
+	
+-Mejorar la calidad del código: Al reutilizar código probado, se reducen errores.
+
+-Facilitar la escalabilidad: Permiten construir aplicaciones más grandes de forma organizada.
+
+**Relación con paquetes**
+
+En programación, los paquetes son conjuntos de módulos o clases relacionadas que permiten organizar mejor el código, en Python, un paquete puede contener varias librerías o módulos definidos por el usuario, lo que facilita agrupar funcionalidades similares dentro de una misma estructura. Los paquetes también permiten encapsular el código, es decir, controlar qué partes son accesibles desde otros módulos, mejorando la seguridad y organización del programa.
+
+
+
+En el código desarrollado, un ejemplo de librería definida por el usuario se puede observar en la creación de la clase TarjetaPerfil. Esta clase fue definida como un componente personalizado que permite representar la información de un usuario dentro de la interfaz, integrando elementos visuales y funcionales en una sola estructura.
+```python
+class TarjetaPerfil(ft.Container):
+```
+
+Esta clase encapsula distintos elementos como textos y botones, así como la lógica necesaria para interactuar con el componente. Su diseño permite reutilizarla fácilmente al crear múltiples instancias, evitando la repetición de código y facilitando la organización del programa esto se observa cuando se crean objetos de esta clase a partir de diferentes datos:
+```python
+    tarjeta1 = TarjetaPerfil(usuario1)
+    tarjeta2 = TarjetaPerfil(usuario2)
+```
+De esta manera, TarjetaPerfil puede considerarse una librería definida por el usuario, ya que agrupa funcionalidades reutilizables que pueden emplearse en distintas partes del programa cumpliendo con el propósito de las librerías en programación.
+
+**codigo**
+
+
+```python 
+import flet as ft
+from dataclasses import dataclass
+
+# Clase de solo datos
+@dataclass
+class Usuario:
+    nombre: str
+    rol: str
+    color_borde: ft.Colors = ft.Colors.BLUE
+
+
+# Definicion del componente personalizado
+class TarjetaPerfil(ft.Container):
+
+    def __init__(self, usuario: Usuario):
+        super().__init__()
+
+        self.usuario = usuario  # Guardamos el objeto completo
+
+        self.content = ft.Column(
+            controls=[
+                ft.Text(usuario.nombre, weight=ft.FontWeight.BOLD, size=20),
+                ft.Text(usuario.rol, italic=True),
+                ft.ElevatedButton("Ver Perfil", on_click=self.saludar)
+            ],
+            tight=True
+        )
+
+        self.border = ft.border.all(2, usuario.color_borde)
+        self.padding = 10
+        self.border_radius = 10
+        self.width = 200
+
+    def saludar(self, e):
+        print(f"Interactuando con el componente de {self.usuario.nombre}")
+
+
+def main(page: ft.Page):
+    page.title = "Unidad 2 : Componentes Definidos por el Usuario"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
+    # Creamos objetos Usuario
+    usuario1 = Usuario("Ana Garcia", "Desarrolladora Senior", ft.Colors.GREEN)
+    usuario2 = Usuario("Carlos Ruiz", "Arquitecto de Software")
+
+    # Pasamos el objeto completo al componente
+    tarjeta1 = TarjetaPerfil(usuario1)
+    tarjeta2 = TarjetaPerfil(usuario2)
+
+    page.add(
+        ft.Text("Lista de Usuarios", size=30, weight=ft.FontWeight.BOLD),
+        ft.Row(
+            [tarjeta1, tarjeta2], alignment=ft.MainAxisAlignment.CENTER
+        )
+    )
+
+ft.app(target=main)
+
+```
