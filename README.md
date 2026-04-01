@@ -752,4 +752,150 @@ Para que las gráficas se muestren correctamente, se requieren tres elementos cl
 Esto permite mostrar la gráfica dentro de la aplicación.
 
 **Libreria flet_charts**
+La librería flet_charts es una extensión de la librería flet que permite integrar gráficos dentro de aplicaciones desarrolladas con interfaces gráficas. Su principal función es servir como puente entre herramientas de visualización de datos, como matplotlib, y los componentes visuales de Flet.
+
+Esta librería facilita la incorporación de gráficas dentro de una interfaz interactiva, permitiendo mostrar información visual directamente en la aplicación sin necesidad de abrir ventanas externas. De esta manera, mejora la experiencia del usuario y hace que las aplicaciones sean más dinámicas y completas.
+
+flet_charts se utiliza para mostrar gráficas dentro de una aplicación creada con Flet. Es especialmente útil cuando se trabaja con librerías como matplotlib, ya que permite integrar las figuras generadas directamente en la interfaz gráfica.
+
+Sin esta librería, las gráficas creadas con matplotlib no podrían visualizarse fácilmente dentro de la aplicación, ya que normalmente se mostrarían en ventanas externas.
+
+El funcionamiento de flet_charts se basa en recibir una figura previamente creada (por ejemplo, con matplotlib) y convertirla en un componente visual compatible con Flet. Esto se logra mediante el uso de un componente llamado MatplotlibChart, el cual permite renderizar la gráfica dentro de un contenedor de la interfaz.
+
+
+En este programa, la librería flet_charts desempeña un papel fundamental al permitir la integración de gráficas dentro de la interfaz gráfica desarrollada con Flet. Esta librería actúa como un intermediario entre matplotlib, que es la encargada de generar las gráficas, y Flet, que se encarga de mostrarlas en pantalla. Gracias a esta integración, es posible visualizar datos de manera interactiva dentro de la aplicación, sin necesidad de abrir ventanas externas.
+
+Para utilizar esta librería, primero se realiza su importación en el código:
+```python
+import flet_charts as fch
+```
+Posteriormente, su uso se observa en las funciones encargadas de mostrar las distintas gráficas. En cada una de ellas, después de generar la figura con matplotlib, se utiliza el componente MatplotlibChart de flet_charts para insertar la gráfica dentro de un contenedor de la interfaz:
+```python
+        grafica.content = fch.MatplotlibChart(figure=fig)
+```
+En esta instrucción, la variable fig representa la figura creada previamente mediante matplotlib, la cual contiene la gráfica correspondiente (ya sea de barras, circular, de líneas o de dispersión). El componente MatplotlibChart toma esta figura y la convierte en un elemento visual compatible con Flet, permitiendo que sea mostrada dentro del contenedor grafica.
+
+De esta manera, cada vez que el usuario presiona uno de los botones (por ejemplo, “Barras”, “Circular”, “Líneas” o “Dispersión”), se ejecuta una función que genera la gráfica correspondiente y la asigna al contenedor mediante flet_charts. Esto permite actualizar dinámicamente el contenido visual de la aplicación.
+
+El uso de esta librería tiene como objetivo principal integrar la visualización de datos dentro de la interfaz gráfica, haciendo que la aplicación sea más interactiva y funcional. Gracias a flet_charts, las gráficas no se muestran en ventanas externas, sino directamente en el mismo entorno de la aplicación, lo que mejora la experiencia del usuario y facilita la interacción con la información.
+
+**Codiog**
+```python
+import flet as ft
+import matplotlib.pyplot as plt
+import flet_charts as fch
+import random
+
+
+# Gráfica de barras
+def crear_barras():
+    nombres = ["A", "B", "C", "D"]
+    ventas = [15, 30, 45, 10]
+
+    fig, ax = plt.subplots()
+    ax.bar(nombres, ventas) # crea las graficas
+    ax.set_title("Ventas por producto")
+    ax.set_xlabel("Productos")
+    ax.set_ylabel("Ventas")
+
+    return fig
+
+
+#  Gráfica circular
+def crear_circular():
+    nombres = ["Ana", "Carlos", "Luis", "Sofia"]
+    ventas = [10, 15, 7, 12]
+
+    fig, ax = plt.subplots()
+    ax.pie(ventas, labels=nombres, autopct="%1.1f%%") #crea las graficas
+    ax.set_title("Distribución de ventas")
+
+    return fig
+
+
+# Gráfica de líneas
+def crear_lineas():
+    meses = ["Ene", "Feb", "Mar", "Abr", "May"]
+    rendimiento = [10, 25, 18, 40, 35]
+
+    fig, ax = plt.subplots()
+    ax.plot(meses, rendimiento, marker="o") #crea la grafica
+    ax.set_title("Tendencia de rendimiento")
+    ax.set_xlabel("Meses")
+    ax.set_ylabel("Rendimiento")
+    ax.grid(True)
+
+    return fig
+
+
+# Gráfica de dispersión
+def crear_dispersion():
+    x = list(range(20))
+    y = [random.randint(10, 50) for _ in range(20)]
+
+    fig, ax = plt.subplots()
+    ax.scatter(x, y) #crea las graficas
+    ax.set_title("Muestreo de  sensores")
+    ax.set_xlabel("Tiempo")
+    ax.set_ylabel("Valor")
+
+    return fig
+
+
+def main(page: ft.Page):
+
+    page.title = "Gráficas con Flet"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
+    grafica = ft.Container(width=400, height=300) #el espacio de grafica
+
+    # mostrar barras
+    def mostrar_barras(e):
+        fig = crear_barras()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    # mostrar circular
+    def mostrar_circular(e):
+        fig = crear_circular()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    # mostrar líneas
+    def mostrar_lineas(e):
+        fig = crear_lineas()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    # mostrar dispersión
+    def mostrar_dispersion(e):
+        fig = crear_dispersion()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    page.add(
+        ft.Text("Selecciona el tipo de gráfica", size=25, weight="bold"), 
+
+        ft.Row(
+            [
+                ft.ElevatedButton("Barras", on_click=mostrar_barras),
+                ft.ElevatedButton("Circular", on_click=mostrar_circular),
+                ft.ElevatedButton("Líneas", on_click=mostrar_lineas),
+                ft.ElevatedButton("Dispersión", on_click=mostrar_dispersion),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+        ),
+
+        grafica
+    )
+
+
+ft.app(target=main)
+```
+
+## Creación de componentes (visuales y no visuales) definidos por el usuario
 
