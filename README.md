@@ -318,4 +318,98 @@ ft.run(main, assets_dir="assets")
 ```
 ## Uso de librerías proporcionadas por el lenguaje.
 
+Librería: dataclasses
 
+La librería dataclasses es un módulo incluido en la biblioteca estándar de Python que permite crear clases diseñadas principalmente para almacenar datos de forma sencilla y estructurada. Su principal ventaja es que reduce la cantidad de código necesario, ya que genera automáticamente métodos especiales como el constructor (_init), el método de representación (repr_) y otros, sin que el programador tenga que implementarlos manualmente.
+
+Esta librería resulta especialmente útil cuando se trabaja con objetos que únicamente contienen atributos, como registros, configuraciones o entidades dentro de un sistema. Además, mejora la legibilidad del código y facilita su mantenimiento, ya que permite definir clases de manera más clara, ordenada y concisa.
+
+El módulo dataclasses, introducido en Python 3.7, proporciona un decorador llamado @dataclass, el cual genera automáticamente diversos métodos especiales dentro de una clase. Entre ellos se encuentran el método _init, que permite inicializar los atributos; el método __repr, que ofrece una representación en forma de cadena del objeto; y el método __eq, que facilita la comparación entre instancias. Asimismo, puede generar métodos de ordenación como __lt, __le, __gt_ y _ge_ cuando se requiere.
+
+Gracias a estas características, dataclasses permite definir clases de una forma más limpia, directa y eficiente, enfocándose únicamente en la definición de los datos.
+
+**Ejemplo**
+En este código se utiliza la librería dataclasses para definir la clase Usuario, la cual está diseñada únicamente para almacenar información.
+```python
+import flet as ft
+from dataclasses import dataclass
+
+# Clase de solo datos
+@dataclass
+class Usuario:
+    nombre: str
+    rol: str
+    color_borde: ft.Colors = ft.Colors.BLUE
+```
+En este fragmento se emplea el decorador @dataclass, lo que indica que la clase no necesita métodos definidos manualmente, ya que Python genera automáticamente el constructor (_init_) y otros métodos necesarios.
+
+La clase Usuario contiene tres atributos: nombre, rol y color_borde, los cuales representan la información de cada usuario. Gracias al uso de dataclasses, es posible crear objetos de esta clase de forma directa, como se muestra a continuación:
+```python
+    # Creamos objetos Usuario
+    usuario1 = Usuario("Ana Garcia", "Desarrolladora Senior", ft.Colors.GREEN)
+```
+En este caso, no fue necesario definir un constructor explícito, ya que dataclasses lo genera automáticamente. Esto simplifica el código y permite enfocarse únicamente en los datos que se desean manejar.
+
+**Codigo**
+```python
+
+import flet as ft
+from dataclasses import dataclass
+
+# Clase de solo datos
+@dataclass
+class Usuario:
+    nombre: str
+    rol: str
+    color_borde: ft.Colors = ft.Colors.BLUE
+
+
+# Definicion del componente personalizado
+class TarjetaPerfil(ft.Container):
+
+    def __init__(self, usuario: Usuario):
+        super().__init__()
+
+        self.usuario = usuario  # Guardamos el objeto completo
+
+        self.content = ft.Column(
+            controls=[
+                ft.Text(usuario.nombre, weight=ft.FontWeight.BOLD, size=20),
+                ft.Text(usuario.rol, italic=True),
+                ft.ElevatedButton("Ver Perfil", on_click=self.saludar)
+            ],
+            tight=True
+        )
+
+        self.border = ft.border.all(2, usuario.color_borde)
+        self.padding = 10
+        self.border_radius = 10
+        self.width = 200
+
+    def saludar(self, e):
+        print(f"Interactuando con el componente de {self.usuario.nombre}")
+
+
+def main(page: ft.Page):
+    page.title = "Unidad 2 : Componentes Definidos por el Usuario"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
+    # Creamos objetos Usuario
+    usuario1 = Usuario("Ana Garcia", "Desarrolladora Senior", ft.Colors.GREEN)
+    usuario2 = Usuario("Carlos Ruiz", "Arquitecto de Software")
+
+    # Pasamos el objeto completo al componente
+    tarjeta1 = TarjetaPerfil(usuario1)
+    tarjeta2 = TarjetaPerfil(usuario2)
+
+    page.add(
+        ft.Text("Lista de Usuarios", size=30, weight=ft.FontWeight.BOLD),
+        ft.Row(
+            [tarjeta1, tarjeta2], alignment=ft.MainAxisAlignment.CENTER
+        )
+    )
+
+ft.app(target=main)
+
+```
+**Libreria matplotlib**
