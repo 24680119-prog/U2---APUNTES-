@@ -317,7 +317,8 @@ def main(page: ft.Page):
 ft.run(main, assets_dir="assets")
 ```
 ## Uso de librerías proporcionadas por el lenguaje.
-
+En los códigos desarrollados en clase se utilizaron tanto librerías propias del lenguaje Python como librerías externas, por un lado, librerías como dataclasses y random forman parte de la biblioteca estándar de Python, por lo que no requieren instalación adicional.
+Por otro lado, librerías como matplotlib, flet y flet_charts son externas, ya que deben ser instaladas previamente y amplían las funcionalidades del lenguaje, permitiendo la creación de interfaces gráficas y visualización de datos.
 Librería: dataclasses
 
 La librería dataclasses es un módulo incluido en la biblioteca estándar de Python que permite crear clases diseñadas principalmente para almacenar datos de forma sencilla y estructurada. Su principal ventaja es que reduce la cantidad de código necesario, ya que genera automáticamente métodos especiales como el constructor (_init), el método de representación (repr_) y otros, sin que el programador tenga que implementarlos manualmente.
@@ -412,4 +413,343 @@ def main(page: ft.Page):
 ft.app(target=main)
 
 ```
+**Libreria random**
+La librería random es un módulo incluido en la biblioteca estándar de Python que permite generar números pseudoaleatorios y realizar operaciones relacionadas con la aleatoriedad. Aunque los valores generados no son completamente aleatorios, son suficientemente precisos para la mayoría de aplicaciones como simulaciones, juegos, pruebas y modelado de datos.
+
+Para utilizar esta librería, es necesario importarla mediante:
+```python
+
+import random
+```
+**Funciones principales de random**
+
+Entre las funciones más importantes se encuentran:
+-random.random() → Genera un número decimal aleatorio en el rango [0, 1).
+
+random.randint(a, b) → Genera un número entero aleatorio entre a y b (incluidos).
+
+-random.uniform(a, b) → Genera un número decimal aleatorio entre a y b.
+
+-random.choice(seq) → Selecciona un elemento aleatorio de una secuencia.
+
+-random.sample(seq, k) → Devuelve k elementos aleatorios sin repetición.
+
+-random.shuffle(seq) → Reordena los elementos de una lista de forma aleatoria.
+
+-random.seed(n) → Inicializa el generador para obtener resultados reproducibles.
+
+-random.gauss(mu, sigma) → Genera números con distribución normal (gaussiana).
+
+En el siguiente programa  la librería random se utiliza específicamente en la función encargada de crear la gráfica de dispersión.
+```python
+import flet as ft
+import matplotlib.pyplot as plt
+import flet_charts as fch
+import random
+```
+
+En esta línea se utiliza la función random.randint(10, 50), la cual genera números enteros aleatorios entre 10 y 50.
+
+Estos valores se crean dentro de una lista mediante un ciclo que se repite 20 veces, lo que permite generar automáticamente un conjunto de datos.
+```python
+    y = [random.randint(10, 50) for _ in range(20)]
+```
+Gracias a random, se obtiene un conjunto de datos diferente cada vez que se ejecuta el programa. Estos datos se utilizan en la instrucción: Gracias a random, se obtiene un conjunto de datos diferente cada vez que se ejecuta el programa.
+Estos datos se utilizan en la instrucción:
+
+```python
+    ax.scatter(x, y)
+```
+Lo que permite crear una gráfica de dispersión con valores dinámicos, esto hace que la gráfica sea más realista, ya que no utiliza datos fijos, sino que muestra variaciones como ocurriría en situaciones reales.
+```python
+**Codigo**
+
+import flet as ft
+import matplotlib.pyplot as plt
+import flet_charts as fch
+import random
+
+
+# Gráfica de barras
+def crear_barras():
+    nombres = ["A", "B", "C", "D"]
+    ventas = [15, 30, 45, 10]
+
+    fig, ax = plt.subplots()
+    ax.bar(nombres, ventas) # crea las graficas
+    ax.set_title("Ventas por producto")
+    ax.set_xlabel("Productos")
+    ax.set_ylabel("Ventas")
+
+    return fig
+
+
+#  Gráfica circular
+def crear_circular():
+    nombres = ["Ana", "Carlos", "Luis", "Sofia"]
+    ventas = [10, 15, 7, 12]
+
+    fig, ax = plt.subplots()
+    ax.pie(ventas, labels=nombres, autopct="%1.1f%%") #crea las graficas
+    ax.set_title("Distribución de ventas")
+
+    return fig
+
+
+# Gráfica de líneas
+def crear_lineas():
+    meses = ["Ene", "Feb", "Mar", "Abr", "May"]
+    rendimiento = [10, 25, 18, 40, 35]
+
+    fig, ax = plt.subplots()
+    ax.plot(meses, rendimiento, marker="o") #crea la grafica
+    ax.set_title("Tendencia de rendimiento")
+    ax.set_xlabel("Meses")
+    ax.set_ylabel("Rendimiento")
+    ax.grid(True)
+
+    return fig
+
+
+# Gráfica de dispersión
+def crear_dispersion():
+    x = list(range(20))
+    y = [random.randint(10, 50) for _ in range(20)]
+
+    fig, ax = plt.subplots()
+    ax.scatter(x, y) #crea las graficas
+    ax.set_title("Muestreo de  sensores")
+    ax.set_xlabel("Tiempo")
+    ax.set_ylabel("Valor")
+
+    return fig
+
+
+def main(page: ft.Page):
+
+    page.title = "Gráficas con Flet"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
+    grafica = ft.Container(width=400, height=300) #el espacio de grafica
+
+    # mostrar barras
+    def mostrar_barras(e):
+        fig = crear_barras()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    # mostrar circular
+    def mostrar_circular(e):
+        fig = crear_circular()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    # mostrar líneas
+    def mostrar_lineas(e):
+        fig = crear_lineas()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    # mostrar dispersión
+    def mostrar_dispersion(e):
+        fig = crear_dispersion()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    page.add(
+        ft.Text("Selecciona el tipo de gráfica", size=25, weight="bold"), 
+
+        ft.Row(
+            [
+                ft.ElevatedButton("Barras", on_click=mostrar_barras),
+                ft.ElevatedButton("Circular", on_click=mostrar_circular),
+                ft.ElevatedButton("Líneas", on_click=mostrar_lineas),
+                ft.ElevatedButton("Dispersión", on_click=mostrar_dispersion),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+        ),
+
+        grafica
+    )
+
+
+ft.app(target=main)
+```
 **Libreria matplotlib**
+Matplotlib es una librería de Python de código abierto utilizada para la creación de gráficas y la visualización de datos de forma clara y concisa. Es considerada una de las herramientas más populares dentro del lenguaje, ya que permite representar información mediante distintos tipos de gráficos, como gráficas de barras, líneas, dispersión, circulares e histogramas.
+
+Esta librería es ampliamente utilizada debido a su facilidad de uso y a la gran cantidad de opciones de personalización que ofrece, lo que permite adaptar los gráficos a las necesidades específicas de cada usuario. Gracias a esto, resulta una herramienta fundamental para el análisis de datos y la presentación de información visual.
+
+Matplotlib fue desarrollada inicialmente en 2002 por John Hunter con el objetivo de visualizar señales eléctricas del cerebro, buscando replicar en Python las capacidades gráficas de MATLAB. Con el tiempo, ha sido mejorada por la comunidad de código abierto, convirtiéndose en una de las librerías más importantes para la visualización de datos.
+
+Para crear gráficos con Matplotlib, comúnmente se utiliza el módulo pyplot, el cual proporciona funciones sencillas para agregar elementos como líneas, textos e imágenes. El proceso general consiste en crear una figura y sus ejes mediante la función subplots(), representar los datos con funciones específicas según el tipo de gráfica, y posteriormente personalizarla agregando títulos, etiquetas o rejillas.
+
+
+En este programa, la librería matplotlib se utiliza a través de su módulo pyplot, el cual se importa como plt. Esta librería se emplea para crear y visualizar diferentes tipos de gráficas a partir de datos definidos dentro del código.
+
+La librería se utiliza siguiendo una estructura clara dentro de cada función de gráfica (crear_barras, crear_circular, crear_lineas, crear_dispersion):
+```python
+    fig, ax = plt.subplots()
+```
+
+    Primero, se crea una figura (fig) y un conjunto de ejes (ax) usando plt.subplots(). Esta es la base donde se dibuja la gráfica.
+
+Después, se utiliza una función específica dependiendo del tipo de gráfica:
+-ax.bar() → gráfica de barras
+
+-ax.pie() → gráfica circular
+
+-ax.plot() → gráfica de líneas
+
+-ax.scatter() → gráfica de dispersión
+
+por ejemplo 
+```python
+
+    ax.bar(nombres, ventas)
+```
+Finalmente, se personaliza la gráfica con funciones como:
+
+```python
+  
+    ax.set_title("Ventas por producto")
+    ax.set_xlabel("Productos")
+    ax.set_ylabel("Ventas")
+```
+
+Al utilizar matplotlib en este programa, se logra generar diferentes tipos de gráficas (barras, circular, líneas y dispersión) de forma dinámica, cada función crea una gráfica distinta y la devuelve como una figura (fig), la cual posteriormente se muestra en la interfaz gráfica.
+```python
+import flet as ft
+import matplotlib.pyplot as plt
+import flet_charts as fch
+import random
+
+
+# Gráfica de barras
+def crear_barras():
+    nombres = ["A", "B", "C", "D"]
+    ventas = [15, 30, 45, 10]
+
+    fig, ax = plt.subplots()
+    ax.bar(nombres, ventas) # crea las graficas
+    ax.set_title("Ventas por producto")
+    ax.set_xlabel("Productos")
+    ax.set_ylabel("Ventas")
+
+    return fig
+
+
+#  Gráfica circular
+def crear_circular():
+    nombres = ["Ana", "Carlos", "Luis", "Sofia"]
+    ventas = [10, 15, 7, 12]
+
+    fig, ax = plt.subplots()
+    ax.pie(ventas, labels=nombres, autopct="%1.1f%%") #crea las graficas
+    ax.set_title("Distribución de ventas")
+
+    return fig
+
+
+# Gráfica de líneas
+def crear_lineas():
+    meses = ["Ene", "Feb", "Mar", "Abr", "May"]
+    rendimiento = [10, 25, 18, 40, 35]
+
+    fig, ax = plt.subplots()
+    ax.plot(meses, rendimiento, marker="o") #crea la grafica
+    ax.set_title("Tendencia de rendimiento")
+    ax.set_xlabel("Meses")
+    ax.set_ylabel("Rendimiento")
+    ax.grid(True)
+
+    return fig
+
+
+# Gráfica de dispersión
+def crear_dispersion():
+    x = list(range(20))
+    y = [random.randint(10, 50) for _ in range(20)]
+
+    fig, ax = plt.subplots()
+    ax.scatter(x, y) #crea las graficas
+    ax.set_title("Muestreo de  sensores")
+    ax.set_xlabel("Tiempo")
+    ax.set_ylabel("Valor")
+
+    return fig
+
+
+def main(page: ft.Page):
+
+    page.title = "Gráficas con Flet"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
+    grafica = ft.Container(width=400, height=300) #el espacio de grafica
+
+    # mostrar barras
+    def mostrar_barras(e):
+        fig = crear_barras()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    # mostrar circular
+    def mostrar_circular(e):
+        fig = crear_circular()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    # mostrar líneas
+    def mostrar_lineas(e):
+        fig = crear_lineas()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    # mostrar dispersión
+    def mostrar_dispersion(e):
+        fig = crear_dispersion()
+        grafica.content = fch.MatplotlibChart(figure=fig)
+        page.update()
+        plt.close(fig)
+
+    page.add(
+        ft.Text("Selecciona el tipo de gráfica", size=25, weight="bold"), 
+
+        ft.Row(
+            [
+                ft.ElevatedButton("Barras", on_click=mostrar_barras),
+                ft.ElevatedButton("Circular", on_click=mostrar_circular),
+                ft.ElevatedButton("Líneas", on_click=mostrar_lineas),
+                ft.ElevatedButton("Dispersión", on_click=mostrar_dispersion),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+        ),
+
+        grafica
+    )
+
+
+ft.app(target=main)
+```
+Para que las gráficas se muestren correctamente, se requieren tres elementos clave:
+
+1.	Los datos: Se definen dentro de cada función (por ejemplo, listas como nombres y ventas).
+
+2.	La creación de la gráfica con matplotlib: Usando plt.subplots() y funciones como bar(), pie(), plot() o scatter().
+	
+3.	La integración con la interfaz (Flet): La gráfica generada se asigna a un componente visual:
+
+```python
+
+        grafica.content = fch.MatplotlibChart(figure=fig)
+```
+Esto permite mostrar la gráfica dentro de la aplicación.
+
+**Libreria flet_charts 
